@@ -1,7 +1,18 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"log"
+	"main/block"
+)
+
+func init() {
+	log.SetPrefix("Blockchain: ")
+}
 
 func main() {
-	fmt.Printf("Just do it")
+	fmt.Println("Just do it")
+	b := block.NewBlock(0, "init hash")
+
+	b.Print()
 }
