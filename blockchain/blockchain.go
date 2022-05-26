@@ -12,15 +12,20 @@ type Blockchain struct {
 }
 
 func NewBlockchain() *Blockchain {
+	b := &block.Block{}
 	bc := new(Blockchain)
-	bc.CreateBlock(0, "Init hash")
+	bc.CreateBlock(0, b.Hash())
 	return bc
 }
 
-func (bc *Blockchain) CreateBlock(nonce int, previousHash string) *block.Block {
+func (bc *Blockchain) CreateBlock(nonce int, previousHash [32]byte) *block.Block {
 	b := block.NewBlock(nonce, previousHash)
 	bc.chain = append(bc.chain, b)
 	return b
+}
+
+func (bc *Blockchain) LastBlock() *block.Block {
+	return bc.chain[len(bc.chain)-1]
 }
 
 func (bc *Blockchain) Print() {

@@ -20,8 +20,15 @@ func main() {
 	/// Create Blockchain
 	blockChain := blockchain.NewBlockchain()
 	blockChain.Print()
-	blockChain.CreateBlock(5, "hash 1")
+	previousHash := blockChain.LastBlock().Hash()
+	blockChain.CreateBlock(5, previousHash)
 	blockChain.Print()
-	blockChain.CreateBlock(2, "hash 2")
+	previousHash = blockChain.LastBlock().Hash()
+	blockChain.CreateBlock(2, previousHash)
 	blockChain.Print()
+
+	/// Hash block
+	//b := &block.Block{Nonce: 1}
+	//fmt.Printf("%x\n", b.Hash())
+
 }
