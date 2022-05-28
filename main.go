@@ -20,6 +20,8 @@ func main() {
 	/// Create Blockchain
 	blockChain := blockchain.NewBlockchain()
 	blockChain.Print()
+
+	blockChain.AddTransaction("A", "B", 12.0)
 	previousHash := blockChain.LastBlock().Hash()
 	blockChain.CreateBlock(5, previousHash)
 	blockChain.Print()

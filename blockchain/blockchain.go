@@ -3,11 +3,12 @@ package blockchain
 import (
 	"fmt"
 	"main/block"
+	"main/transaction"
 	"strings"
 )
 
 type Blockchain struct {
-	transactionPool []string
+	transactionPool []*transaction.Transaction
 	chain           []*block.Block
 }
 
@@ -19,13 +20,19 @@ func NewBlockchain() *Blockchain {
 }
 
 func (bc *Blockchain) CreateBlock(nonce int, previousHash [32]byte) *block.Block {
-	b := block.NewBlock(nonce, previousHash)
+	b := block.NewBlock(nonce, previousHash, bc.transactionPool)
 	bc.chain = append(bc.chain, b)
+	bc.transactionPool = []*transaction.Transaction{}
 	return b
 }
 
 func (bc *Blockchain) LastBlock() *block.Block {
 	return bc.chain[len(bc.chain)-1]
+}
+
+func (bc *Blockchain) AddTransaction(sender string, recipient string, value float32) {
+	t := transaction.NewTransaction(sender, recipient, value)
+	bc.transactionPool = append(bc.transactionPool, t)
 }
 
 func (bc *Blockchain) Print() {
