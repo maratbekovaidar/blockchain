@@ -23,7 +23,7 @@ func main() {
 	blockChain := NewBlockchain(myBlockchainAddress)
 	blockChain.Print()
 
-	blockChain.AddTransaction("A", "B", 12.0)
+	blockChain.AddTransaction("Aidar", "Abylay", 12.0)
 	blockChain.Mining()
 	blockChain.Print()
 
@@ -31,6 +31,10 @@ func main() {
 	blockChain.AddTransaction("X", "Y", 2.0)
 	blockChain.Mining()
 	blockChain.Print()
+
+	fmt.Printf("C %.1f\n", blockChain.CalculateTotalAmount("my_blockchain_address"))
+	fmt.Printf("C %.1f\n", blockChain.CalculateTotalAmount("Aidar"))
+	fmt.Printf("C %.1f\n", blockChain.CalculateTotalAmount("Abylay"))
 
 	/// Hash block
 	//b := &block.Block{Nonce: 1}
