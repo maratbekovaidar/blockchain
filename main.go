@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"log"
-	"main/blockchain"
 )
 
 func init() {
@@ -18,15 +17,20 @@ func main() {
 	//b.Print()
 
 	/// Create Blockchain
-	blockChain := blockchain.NewBlockchain()
+	blockChain := NewBlockchain()
 	blockChain.Print()
 
 	blockChain.AddTransaction("A", "B", 12.0)
 	previousHash := blockChain.LastBlock().Hash()
-	blockChain.CreateBlock(5, previousHash)
+	nonce := blockChain.ProofOfWork()
+	blockChain.CreateBlock(nonce, previousHash)
 	blockChain.Print()
+
+	blockChain.AddTransaction("C", "B", 2.0)
+	blockChain.AddTransaction("X", "Y", 2.0)
 	previousHash = blockChain.LastBlock().Hash()
-	blockChain.CreateBlock(2, previousHash)
+	nonce = blockChain.ProofOfWork()
+	blockChain.CreateBlock(nonce, previousHash)
 	blockChain.Print()
 
 	/// Hash block
