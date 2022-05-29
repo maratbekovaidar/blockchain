@@ -17,20 +17,19 @@ func main() {
 	//b.Print()
 
 	/// Create Blockchain
-	blockChain := NewBlockchain()
+
+	myBlockchainAddress := "my_blockchain_address"
+
+	blockChain := NewBlockchain(myBlockchainAddress)
 	blockChain.Print()
 
 	blockChain.AddTransaction("A", "B", 12.0)
-	previousHash := blockChain.LastBlock().Hash()
-	nonce := blockChain.ProofOfWork()
-	blockChain.CreateBlock(nonce, previousHash)
+	blockChain.Mining()
 	blockChain.Print()
 
 	blockChain.AddTransaction("C", "B", 2.0)
 	blockChain.AddTransaction("X", "Y", 2.0)
-	previousHash = blockChain.LastBlock().Hash()
-	nonce = blockChain.ProofOfWork()
-	blockChain.CreateBlock(nonce, previousHash)
+	blockChain.Mining()
 	blockChain.Print()
 
 	/// Hash block
