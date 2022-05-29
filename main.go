@@ -18,23 +18,10 @@ func main() {
 	walletA := wallet.NewWallet()
 	walletB := wallet.NewWallet()
 
-	fmt.Println(walletA.PublicKeyStr())
-	fmt.Println(walletB.PublicKeyStr())
-
 	/// Wallet
-	t := wallet.NewTransaction(
-		walletA.PrivateKey(),
-		walletA.PublicKey(),
-		walletA.BlockchainAddress(),
-		walletB.BlockchainAddress(),
-		1.0,
-	)
+	t := wallet.NewTransaction(walletA.PrivateKey(), walletA.PublicKey(), walletA.BlockchainAddress(), walletB.BlockchainAddress(), 1.0)
 
-	/// Blockchain
-	blockChain := block.NewBlockchain(walletM.BlockchainAddress())
-	isAdded := blockChain.AddTransaction(walletA.BlockchainAddress(), walletB.BlockchainAddress(),
-		1.0, walletA.PublicKey(), t.GenerateSignature())
-
+	blockchain := block.NewBlockchain(walletM.BlockchainAddress())
+	isAdded := blockchain.AddTransaction(walletA.BlockchainAddress(), walletB.BlockchainAddress(), 1.0, walletA.PublicKey(), t.GenerateSignature())
 	fmt.Println("Added? ", isAdded)
-
 }

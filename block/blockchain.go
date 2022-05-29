@@ -8,7 +8,54 @@ import (
 	"log"
 	"main/utils"
 	"strings"
+	"time"
 )
+
+type Block struct {
+	timestamp    int64
+	Nonce        int
+	previousHash [32]byte
+	transactions []*Transaction
+}
+
+func NewBlock(nonce int, previousHash [32]byte, transactions []*Transaction) *Block {
+	b := new(Block)
+	b.timestamp = time.Now().UnixNano()
+	b.Nonce = nonce
+	b.previousHash = previousHash
+	b.transactions = transactions
+	return b
+}
+
+func (b *Block) Hash() [32]byte {
+	m, _ := json.Marshal(b)
+	return sha256.Sum256([]byte(m))
+}
+
+func (b *Block) MarshalJSON() ([]byte, error) {
+	return json.Marshal(struct {
+		Timestamp    int64          `json:"timestamp"`
+		Nonce        int            `json:"nonce"`
+		PreviousHash [32]byte       `json:"previousHash"`
+		Transactions []*Transaction `json:"transactions"`
+	}{
+		Timestamp:    b.timestamp,
+		Nonce:        b.Nonce,
+		PreviousHash: b.previousHash,
+		Transactions: b.transactions,
+	})
+}
+
+func (b *Block) Print() {
+	fmt.Printf("timestamp      %d\n", b.timestamp)
+	fmt.Printf("nonce          %d\n", b.Nonce)
+	for _, t := range b.transactions {
+		t.Print()
+	}
+	fmt.Printf("transactions   %x\n", b.transactions)
+}
+
+/// Blockchain
 
 type Blockchain struct {
 	transactionPool   []*Transaction
@@ -53,13 +100,10 @@ func (bc *Blockchain) AddTransaction(sender string, recipient string, value floa
 }
 
 func (bc *Blockchain) VerifyTransactionSignature(
-	senderPublicKey *ecdsa.PublicKey, s *utils.Signature, t *Transaction,
-) bool {
+	senderPublicKey *ecdsa.PublicKey, s *utils.Signature, t *Transaction) bool {
 	m, _ := json.Marshal(t)
 	h := sha256.Sum256([]byte(m))
-	b := ecdsa.Verify(senderPublicKey, h[:], s.R, s.S)
-	fmt.Println("Verify Transaction Signature: ", b)
-	return b
+	return ecdsa.Verify(senderPublicKey, h[:], s.R, s.S)
 }
 
 func (bc *Blockchain) CopyTransactionPool() []*Transaction {
@@ -120,4 +164,39 @@ func (bc *Blockchain) Print() {
 		b.Print()
 	}
 	fmt.Printf("%s\n", strings.Repeat("*", 59))
+}
+
+const (
+	MINING_DIFFICULTY = 3
+	MINING_SENDER     = "THE BLOCKCHAIN"
+	MINING_REWARD     = 1.0
+)
+
+type Transaction struct {
+	SenderBlockchainAddress    string
+	RecipientBlockchainAddress string
+	Value                      float32
+}
+
+func NewTransaction(sender string, recipient string, value float32) *Transaction {
+	return &Transaction{sender, recipient, value}
+}
+
+func (t *Transaction) Print() {
+	fmt.Printf("%s\n", strings.Repeat("-", 49))
+	fmt.Printf("Sender           %s\n", t.SenderBlockchainAddress)
+	fmt.Printf("Recipient        %s\n", t.RecipientBlockchainAddress)
+	fmt.Printf("Value            %.1f\n", t.Value)
+}
+
+func (t *Transaction) MarshalJSON() ([]byte, error) {
+	return json.Marshal(struct {
+		SenderBlockchainAddress    string  `json:"senderBlockchainAddress"`
+		RecipientBlockchainAddress string  `json:"recipientBlockchainAddress"`
+		Value                      float32 `json:"value"`
+	}{
+		SenderBlockchainAddress:    t.SenderBlockchainAddress,
+		RecipientBlockchainAddress: t.RecipientBlockchainAddress,
+		Value:                      t.Value,
+	})
 }
