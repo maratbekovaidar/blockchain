@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"main/block"
 	"main/wallet"
 )
 
@@ -13,14 +14,27 @@ func init() {
 func main() {
 	fmt.Println("Just do it")
 
-	w := wallet.NewWallet()
-	//fmt.Println(w.PrivateKeyStr())
-	//fmt.Println(w.PublicKeyStr())
-	//
-	//fmt.Println(w.PrivateKey())
-	//fmt.Println(w.PublicKey())
+	walletM := wallet.NewWallet()
+	walletA := wallet.NewWallet()
+	walletB := wallet.NewWallet()
 
-	fmt.Println(w.BlockchainAddress())
-	t := wallet.NewTransaction(w.PrivateKey(), w.PublicKey(), w.BlockchainAddress(), "B", 1.0)
-	fmt.Printf("Signature %s\n", t.GenerateSignature())
+	fmt.Println(walletA.PublicKeyStr())
+	fmt.Println(walletB.PublicKeyStr())
+
+	/// Wallet
+	t := wallet.NewTransaction(
+		walletA.PrivateKey(),
+		walletA.PublicKey(),
+		walletA.BlockchainAddress(),
+		walletB.BlockchainAddress(),
+		1.0,
+	)
+
+	/// Blockchain
+	blockChain := block.NewBlockchain(walletM.BlockchainAddress())
+	isAdded := blockChain.AddTransaction(walletA.BlockchainAddress(), walletB.BlockchainAddress(),
+		1.0, walletA.PublicKey(), t.GenerateSignature())
+
+	fmt.Println("Added? ", isAdded)
+
 }
