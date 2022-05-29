@@ -14,10 +14,11 @@ func main() {
 	fmt.Println("Just do it")
 
 	w := wallet.NewWallet()
-	fmt.Println(w.PrivateKeyStr())
-	fmt.Println(w.PublicKeyStr())
+	//fmt.Println(w.PrivateKeyStr())
+	//fmt.Println(w.PublicKeyStr())
+	//
+	//fmt.Println(w.PrivateKey())
+	//fmt.Println(w.PublicKey())
 
-	fmt.Println(w.PrivateKey())
-	fmt.Println(w.PublicKey())
-
+	fmt.Println(w.BlockchainAddress())
 }
