@@ -1,13 +1,13 @@
 package block
 
 import (
+	"blockchain/utils"
 	"bytes"
 	"crypto/ecdsa"
 	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"goblockchain/utils"
 	"log"
 	"net/http"
 	"strings"

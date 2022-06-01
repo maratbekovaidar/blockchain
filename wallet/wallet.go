@@ -1,6 +1,7 @@
 package wallet
 
 import (
+	"blockchain/utils"
 	"crypto/ecdsa"
 	"crypto/elliptic"
 	"crypto/rand"
@@ -8,7 +9,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/btcsuite/btcutil/base58"
-	"goblockchain/utils"
 	"golang.org/x/crypto/ripemd160"
 )
 

@@ -1,12 +1,12 @@
 package main
 
 import (
+	"blockchain/block"
+	"blockchain/utils"
+	"blockchain/wallet"
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"goblockchain/block"
-	"goblockchain/utils"
-	"goblockchain/wallet"
 	"html/template"
 	"io"
 	"log"

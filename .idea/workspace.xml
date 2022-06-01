@@ -40,7 +40,7 @@
   </component>
   <component name="RunManager" selected="Go Build.blockchain server 5000">
     <configuration name="blockchain server 5000" type="GoApplicationRunConfiguration" factoryName="Go Application">
-      <module name="goblockchain" />
+      <module name="blockchain" />
       <working_directory value="$PROJECT_DIR$" />
       <go_parameters value="-i" />
       <kind value="PACKAGE" />
@@ -50,7 +50,7 @@
       <method v="2" />
     </configuration>
     <configuration name="blockchain server 5001" type="GoApplicationRunConfiguration" factoryName="Go Application">
-      <module name="goblockchain" />
+      <module name="blockchain" />
       <working_directory value="$PROJECT_DIR$" />
       <go_parameters value="-i" />
       <parameters value="-port 5001" />
@@ -61,7 +61,7 @@
       <method v="2" />
     </configuration>
     <configuration name="blockchain server 5002" type="GoApplicationRunConfiguration" factoryName="Go Application">
-      <module name="goblockchain" />
+      <module name="blockchain" />
       <working_directory value="$PROJECT_DIR$" />
       <go_parameters value="-i" />
       <parameters value="-port 5002" />
@@ -72,7 +72,7 @@
       <method v="2" />
     </configuration>
     <configuration name="cmd" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true">
-      <module name="goblockchain" />
+      <module name="blockchain" />
       <working_directory value="$PROJECT_DIR$" />
       <go_parameters value="-i" />
       <kind value="PACKAGE" />
@@ -82,7 +82,7 @@
       <method v="2" />
     </configuration>
     <configuration name="wallet server 8080" type="GoApplicationRunConfiguration" factoryName="Go Application">
-      <module name="goblockchain" />
+      <module name="blockchain" />
       <working_directory value="$PROJECT_DIR$" />
       <go_parameters value="-i" />
       <kind value="PACKAGE" />
@@ -92,7 +92,7 @@
       <method v="2" />
     </configuration>
     <configuration name="wallet server 8081" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true">
-      <module name="goblockchain" />
+      <module name="blockchain" />
       <working_directory value="$PROJECT_DIR$" />
       <parameters value="-port 8081 -gateway http://127.0.0.1:5001" />
       <kind value="PACKAGE" />
