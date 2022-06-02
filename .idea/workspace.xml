@@ -5,20 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="05ddedcd-48c2-4ef2-8ba4-47849b337c4f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/contract/contract.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/firebase/.profile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/firebase/entity/post.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/firebase/pragmatic-reviews-e8660.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/firebase/repository/posts-repo.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/firebase/routes.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/firebase/server.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wallet_server/.profile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/block/blockchain.go" beforeDir="false" afterPath="$PROJECT_DIR$/block/blockchain.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/ipfs.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/ipfs.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wallet/wallet.go" beforeDir="false" afterPath="$PROJECT_DIR$/wallet/wallet.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/firebase/repository/posts-repo.go" beforeDir="false" afterPath="$PROJECT_DIR$/firebase/repository/posts-repo.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wallet_server/.profile" beforeDir="false" afterPath="$PROJECT_DIR$/wallet_server/.profile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wallet_server/wallet_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/wallet_server/wallet_server.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -33,7 +22,7 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" url="file://$USER_HOME$/go/go1.18" />
+  <component name="GOROOT" url="file:///usr/local/go" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -48,18 +37,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="DefaultGoTemplateProperty" value="Go File" />
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="go.format.on.save.advertiser.fired" value="true" />
-    <property name="go.formatter.settings.were.checked" value="true" />
-    <property name="go.import.settings.migrated" value="true" />
-    <property name="go.modules.go.list.on.any.changes.was.set" value="true" />
-    <property name="go.watchers.conflict.with.on.save.actions.check.performed" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/wallet_server" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.go.format.on.save.advertiser.fired&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/Zhandos/Desktop/github/blockchain&quot;
+  }
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Aidar\Desktop\GitHub\blockchain\wallet_server" />
@@ -71,7 +61,7 @@
       <recent name="C:\Users\Aidar\Desktop\GitHub\blockchain\utils\images" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Build.wallet server 8080">
+  <component name="RunManager" selected="Go Build.blockchain server 5000">
     <configuration name=".profile" type="BashProRunConfiguration" temporary="true">
       <option name="scriptPath" value="$PROJECT_DIR$/firebase/.profile" />
       <method v="2" />
@@ -79,7 +69,6 @@
     <configuration name="blockchain server 5000" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="blockchain" />
       <working_directory value="$PROJECT_DIR$" />
-      <go_parameters value="-i" />
       <kind value="PACKAGE" />
       <package value="blockchain/blockchain_server" />
       <directory value="$PROJECT_DIR$" />
@@ -146,11 +135,9 @@
       <item itemvalue="Go Build.wallet server 8080" />
       <item itemvalue="Go Build.cmd" />
       <item itemvalue="Go Build.wallet server 8081" />
-      <item itemvalue="BashSupport Pro..profile" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="BashSupport Pro..profile" />
         <item itemvalue="Go Build.wallet server 8081" />
         <item itemvalue="Go Build.cmd" />
       </list>
@@ -172,6 +159,6 @@
     </option>
   </component>
   <component name="VgoProject">
-    <integration-enabled>true</integration-enabled>
+    <settings-migrated>true</settings-migrated>
   </component>
 </project>

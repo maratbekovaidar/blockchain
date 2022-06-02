@@ -235,7 +235,7 @@ func (ws *WalletServer) Run() {
 	http.HandleFunc("/wallet/amount", ws.WalletAmount)
 	http.HandleFunc("/transaction", ws.CreateTransaction)
 
-	//http.HandleFunc("/account", ws.Wallet)
+	http.HandleFunc("/account", ws.Wallet)
 
 	log.Fatal(http.ListenAndServe("0.0.0.0:"+strconv.Itoa(int(ws.Port())), nil))
 }

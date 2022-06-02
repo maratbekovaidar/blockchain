@@ -8,6 +8,6 @@ fi
 if [ -d "$HOME/bin" ]; then
     PATH="$HOME/bin: $PATH"
 fi
-SET PATH=%PATH%/usr/local/go/bin
-SET GOOGLE_APPLICATION_CREDENTIALS=C:/Users/Aidar/Desktop/GitHub/blockchain/firebase/pragmatic-reviews-e8660.json
+export PATH=$PATH:/usr/local/go/bin
+export GOOGLE_APPLICATION_CREDENTIALS="/Users/Zhandos/GolandProjects/golang-rest-api/pragmatic-reviews-e8660.json"
 

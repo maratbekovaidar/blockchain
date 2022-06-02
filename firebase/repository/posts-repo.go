@@ -23,7 +23,7 @@ func NewPostRepository() PostRepository {
 
 const (
 	projectId      string = "pragmatic-reviews-e8660"
-	collectionName string = "posts"
+	collectionName string = "users"
 )
 
 func (*repo) Save(post *utils.User, blockchainAddress string) (*utils.User, error) {
