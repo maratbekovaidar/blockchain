@@ -16,13 +16,18 @@ import (
 
 type User struct {
 	Name       string            `json:"name"`
+	Password   string            `json:"password"`
 	Email      string            `json:"email"`
 	Field      string            `json:"field"`
+	Company    bool              `json:"company"`
 	Reputation string            `json:"reputation"`
 	Optional   map[string]string `json:"optional"`
 }
 
 func (u *User) UploadUserToIPFS() string {
+	if u == nil {
+		return "THE BLOCKCHAIN"
+	}
 	file, _ := json.MarshalIndent(u, "", " ")
 	_ = ioutil.WriteFile(u.Email+".json", file, 0644)
 	c, err := w3s.NewClient(w3s.WithToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDVDNEU1RjEyMDc5MTBBZjk1YThkY0E1MTgxMjBmQ2MzQWJEM0FhMGQiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NTQxMTEzOTQ0NTAsIm5hbWUiOiJxb2x0eXFzaGFzaCJ9.btlU_FnsRRShI2eI4WvmHKQ75JiMPxRwUp_iZdLjYVo"))

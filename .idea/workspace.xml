@@ -5,14 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="05ddedcd-48c2-4ef2-8ba4-47849b337c4f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/utils/images/donotresist.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/images/pinpie.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/ipfs.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contract/contract.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/firebase/.profile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/firebase/entity/post.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/firebase/pragmatic-reviews-e8660.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/firebase/repository/posts-repo.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/firebase/routes.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/firebase/server.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallet_server/.profile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blockchain_server/blockchain_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/blockchain_server/blockchain_server.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/block/blockchain.go" beforeDir="false" afterPath="$PROJECT_DIR$/block/blockchain.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/ipfs.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/ipfs.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wallet/wallet.go" beforeDir="false" afterPath="$PROJECT_DIR$/wallet/wallet.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wallet_server/wallet_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/wallet_server/wallet_server.go" afterDir="false" />
     </list>
@@ -53,18 +58,24 @@
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.modules.go.list.on.any.changes.was.set" value="true" />
     <property name="go.watchers.conflict.with.on.save.actions.check.performed" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/wallet_server" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Aidar\Desktop\GitHub\blockchain\wallet_server" />
       <recent name="C:\Users\Aidar\Desktop\Go\goblockchain" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Aidar\Desktop\GitHub\blockchain\firebase" />
       <recent name="C:\Users\Aidar\Desktop\GitHub\blockchain\utils" />
       <recent name="C:\Users\Aidar\Desktop\GitHub\blockchain\utils\images" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Build.wallet server 8081">
+  <component name="RunManager" selected="Go Build.wallet server 8080">
+    <configuration name=".profile" type="BashProRunConfiguration" temporary="true">
+      <option name="scriptPath" value="$PROJECT_DIR$/firebase/.profile" />
+      <method v="2" />
+    </configuration>
     <configuration name="blockchain server 5000" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="blockchain" />
       <working_directory value="$PROJECT_DIR$" />
@@ -135,9 +146,11 @@
       <item itemvalue="Go Build.wallet server 8080" />
       <item itemvalue="Go Build.cmd" />
       <item itemvalue="Go Build.wallet server 8081" />
+      <item itemvalue="BashSupport Pro..profile" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="BashSupport Pro..profile" />
         <item itemvalue="Go Build.wallet server 8081" />
         <item itemvalue="Go Build.cmd" />
       </list>

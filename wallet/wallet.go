@@ -15,7 +15,7 @@ import (
 type Wallet struct {
 	privateKey        *ecdsa.PrivateKey
 	publicKey         *ecdsa.PublicKey
-	user              *utils.User
+	data              string
 	blockchainAddress string
 }
 
@@ -55,7 +55,7 @@ func NewWallet(u *utils.User) *Wallet {
 	// 9. Convert the result from a byte string into base58.
 	address := base58.Encode(dc8)
 	w.blockchainAddress = address
-	w.user = u
+	w.data = u.UploadUserToIPFS()
 	return w
 }
 
@@ -81,23 +81,15 @@ func (w *Wallet) BlockchainAddress() string {
 
 func (w *Wallet) MarshalJSON() ([]byte, error) {
 	return json.Marshal(struct {
-		PrivateKey        string            `json:"private_key"`
-		PublicKey         string            `json:"public_key"`
-		BlockchainAddress string            `json:"blockchain_address"`
-		Name              string            `json:"name"`
-		Email             string            `json:"email"`
-		Field             string            `json:"field"`
-		Reputation        string            `json:"reputation"`
-		Optional          map[string]string `json:"optional"`
+		PrivateKey        string `json:"private_key"`
+		PublicKey         string `json:"public_key"`
+		BlockchainAddress string `json:"blockchain_address"`
+		Data              string `json:"data"`
 	}{
 		PrivateKey:        w.PrivateKeyStr(),
 		PublicKey:         w.PublicKeyStr(),
 		BlockchainAddress: w.BlockchainAddress(),
-		Name:              w.user.Name,
-		Email:             w.user.Email,
-		Field:             w.user.Field,
-		Reputation:        w.user.Reputation,
-		Optional:          w.user.Optional,
+		Data:              w.data,
 	})
 }
 

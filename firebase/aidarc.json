@@ -1,0 +1,11 @@
+{
+ "name": "Aidar",
+ "password": "11qwerty",
+ "email": "aidarc",
+ "field": "tractor",
+ "company": false,
+ "reputation": "100",
+ "optional": {
+  "age": "12"
+ }
+}
