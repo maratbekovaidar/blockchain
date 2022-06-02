@@ -15,10 +15,11 @@ import (
 type Wallet struct {
 	privateKey        *ecdsa.PrivateKey
 	publicKey         *ecdsa.PublicKey
+	user              *utils.User
 	blockchainAddress string
 }
 
-func NewWallet() *Wallet {
+func NewWallet(u *utils.User) *Wallet {
 	// 1. Creating ECDSA private key (32 bytes) public key (64 bytes)
 	w := new(Wallet)
 	privateKey, _ := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
@@ -54,6 +55,7 @@ func NewWallet() *Wallet {
 	// 9. Convert the result from a byte string into base58.
 	address := base58.Encode(dc8)
 	w.blockchainAddress = address
+	w.user = u
 	return w
 }
 
@@ -79,13 +81,23 @@ func (w *Wallet) BlockchainAddress() string {
 
 func (w *Wallet) MarshalJSON() ([]byte, error) {
 	return json.Marshal(struct {
-		PrivateKey        string `json:"private_key"`
-		PublicKey         string `json:"public_key"`
-		BlockchainAddress string `json:"blockchain_address"`
+		PrivateKey        string            `json:"private_key"`
+		PublicKey         string            `json:"public_key"`
+		BlockchainAddress string            `json:"blockchain_address"`
+		Name              string            `json:"name"`
+		Email             string            `json:"email"`
+		Field             string            `json:"field"`
+		Reputation        string            `json:"reputation"`
+		Optional          map[string]string `json:"optional"`
 	}{
 		PrivateKey:        w.PrivateKeyStr(),
 		PublicKey:         w.PublicKeyStr(),
 		BlockchainAddress: w.BlockchainAddress(),
+		Name:              w.user.Name,
+		Email:             w.user.Email,
+		Field:             w.user.Field,
+		Reputation:        w.user.Reputation,
+		Optional:          w.user.Optional,
 	})
 }
 

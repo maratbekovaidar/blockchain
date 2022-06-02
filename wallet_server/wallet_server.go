@@ -48,7 +48,15 @@ func (ws *WalletServer) Wallet(w http.ResponseWriter, req *http.Request) {
 	switch req.Method {
 	case http.MethodPost:
 		w.Header().Add("Content-Type", "application/json")
-		myWallet := wallet.NewWallet()
+		decoder := json.NewDecoder(req.Body)
+		var u utils.User
+		err := decoder.Decode(&u)
+		if err != nil {
+			//log.Printf("ERROR: %v", err)
+			io.WriteString(w, string(utils.JsonStatus("Body emty")))
+			return
+		}
+		myWallet := wallet.NewWallet(&u)
 		m, _ := myWallet.MarshalJSON()
 		io.WriteString(w, string(m[:]))
 	default:
@@ -117,6 +125,8 @@ func (ws *WalletServer) WalletAmount(w http.ResponseWriter, req *http.Request) {
 	case http.MethodGet:
 		blockchainAddress := req.URL.Query().Get("blockchain_address")
 		endpoint := fmt.Sprintf("%s/amount", ws.Gateway())
+
+		log.Println(endpoint)
 
 		client := &http.Client{}
 		bcsReq, _ := http.NewRequest("GET", endpoint, nil)
