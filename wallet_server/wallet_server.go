@@ -109,9 +109,8 @@ func (ws *WalletServer) Wallet(w http.ResponseWriter, req *http.Request) {
 		myWallet := wallet.NewWallet(&u)
 		m, _ := myWallet.MarshalJSON()
 
-		firebaseSome, errFire := firebase.NewPostRepository().Save(&u, myWallet.BlockchainAddress())
+		_, errFire := firebase.SaveAddresses(myWallet.IPFSAddress(), myWallet.BlockchainAddress())
 
-		fmt.Printf(firebaseSome.Email)
 		if errFire != nil {
 			//log.Printf("ERROR: %v", err)
 			io.WriteString(w, string(utils.JsonStatus("Firebase error")))

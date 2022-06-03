@@ -26,6 +26,26 @@ const (
 	collectionName string = "users"
 )
 
+func SaveAddresses(ipfsAddress string, blockchainAddress string) (bool, error) {
+	ctx := context.Background()
+	client, err := firestore.NewClient(ctx, projectId)
+	if err != nil {
+		log.Fatalf("Failed to create a Firestore Client: %v", err)
+		return false, err
+	}
+
+	defer client.Close()
+	_, _, err = client.Collection(collectionName).Add(ctx, map[string]interface{}{
+		"ipfsAddress":        ipfsAddress,
+		"blockchain_address": blockchainAddress,
+	})
+	if err != nil {
+		log.Fatalf("Failed adding a new post: %v", err)
+		return false, err
+	}
+	return true, nil
+}
+
 func (*repo) Save(post *utils.User, blockchainAddress string) (*utils.User, error) {
 	ctx := context.Background()
 	client, err := firestore.NewClient(ctx, projectId)

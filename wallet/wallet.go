@@ -75,6 +75,10 @@ func (w *Wallet) PublicKeyStr() string {
 	return fmt.Sprintf("%064x%064x", w.publicKey.X.Bytes(), w.publicKey.Y.Bytes())
 }
 
+func (w *Wallet) IPFSAddress() string {
+	return w.data
+}
+
 func (w *Wallet) BlockchainAddress() string {
 	return w.blockchainAddress
 }
