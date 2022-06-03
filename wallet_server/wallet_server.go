@@ -96,29 +96,25 @@ func (ws *WalletServer) WalletInfo(w http.ResponseWriter, req *http.Request) {
 
 func setupResponse(w *http.ResponseWriter, req *http.Request) {
 	(*w).Header().Set("Access-Control-Allow-Origin", "*")
-	(*w).Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+	(*w).Header().Set("Access-Control-Allow-Methods", "POST")
 	(*w).Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
 }
 
 func (ws *WalletServer) Wallet(w http.ResponseWriter, req *http.Request) {
-	//w.Header().Set("Access-Control-Allow-Origin", "*")
-	//w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
-	//w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
-	//w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
-	//w.Header().Set("Content-Type", "application/json")
-	setupResponse(&w, req)
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	w.Header().Set("Access-Control-Allow-Methods", "POST")
+	w.Header().Set("Content-Type", "application/json")
+	//setupResponse(&w, req)
 	switch req.Method {
 	case http.MethodPost:
-		//w.Header().Set("Access-Control-Allow-Origin", "*")
-		//w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
-		//w.Header().Set("Content-Type", "application/json")
-		//w.Header().Set("Access-Control-Allow-Headers","Content-Type,access-control-allow-origin, access-control-allow-headers")
 		decoder := json.NewDecoder(req.Body)
 		var u utils.User
 		err := decoder.Decode(&u)
 		if err != nil {
 			//log.Printf("ERROR: %v", err)
-			io.WriteString(w, string(utils.JsonStatus("Body emty")))
+			io.WriteString(w, string(utils.JsonStatus("Body error")))
 			return
 		}
 		myWallet := wallet.NewWallet(&u)
@@ -132,18 +128,63 @@ func (ws *WalletServer) Wallet(w http.ResponseWriter, req *http.Request) {
 			return
 		}
 
-		w.WriteHeader(http.StatusCreated)
+		w.WriteHeader(http.StatusOK)
+		//_, resJsonErr := w.Write(m)
+		//if resJsonErr != nil {
+		//	log.Println("Huinya")
+		//}
 		io.WriteString(w, string(m[:]))
 
-		//io.WriteString(w, "Кирип келдим клубка")
+		//io.WriteString(w, string(m))
 	default:
 		w.WriteHeader(http.StatusBadRequest)
 		log.Println("ERROR: Invalid HTTP Method")
 	}
 }
 
-func (ws *WalletServer) CreateTransaction(w http.ResponseWriter, req *http.Request) {
+func (ws *WalletServer) LoginWallet(w http.ResponseWriter, req *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	log.Println("req", req.Body)
 	switch req.Method {
+	case http.MethodPost:
+		decoder := json.NewDecoder(req.Body)
+		log.Println("decode", decoder)
+	//var u utils.User
+	//err := decoder.Decode(&u)
+	//if err != nil {
+	//	//log.Printf("ERROR: %v", err)
+	//	io.WriteString(w, string(utils.JsonStatus("Body error")))
+	//	return
+	//}
+	//blockchainAddress := req.URL.Query().Get("blockchain_address")
+	//endpoint := fmt.Sprintf("%s/login", ws.Gateway())
+	//client := &http.Client{}
+	//bcsReq, _ := http.NewRequest("POST", endpoint, nil)
+	//q := bcsReq.URL.Query()
+	//q.Add("blockchain_address", blockchainAddress)
+	//bcsReq.URL.RawQuery = q.Encode()
+	//
+	//bcsResp, err := client.Do(bcsReq)
+	//m, _ := json.Marshal(struct {
+	//	Message string  `json:"user"`
+	//}{
+	//	Message: bcsResp.Body,
+	//})
+	//io.WriteString(w, string(m[:]))
+
+	default:
+		w.WriteHeader(http.StatusBadRequest)
+		log.Println("Error: Invalid http method")
+	}
+}
+
+func (ws *WalletServer) CreateTransaction(w http.ResponseWriter, req *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	w.Header().Set("Content-Type", "application/json")
+	switch req.Method {
+	case http.MethodOptions:
+		w.WriteHeader(http.StatusOK)
 	case http.MethodPost:
 		decoder := json.NewDecoder(req.Body)
 		var t wallet.TransactionRequest
@@ -191,6 +232,7 @@ func (ws *WalletServer) CreateTransaction(w http.ResponseWriter, req *http.Reque
 			return
 		}
 		io.WriteString(w, string(utils.JsonStatus("fail")))
+
 	default:
 		w.WriteHeader(http.StatusBadRequest)
 		log.Println("ERROR: Invalid HTTP Method")
@@ -198,6 +240,11 @@ func (ws *WalletServer) CreateTransaction(w http.ResponseWriter, req *http.Reque
 }
 
 func (ws *WalletServer) WalletAmount(w http.ResponseWriter, req *http.Request) {
+
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	w.Header().Set("Content-Type", "application/json")
+
 	switch req.Method {
 	case http.MethodGet:
 		blockchainAddress := req.URL.Query().Get("blockchain_address")
@@ -218,9 +265,6 @@ func (ws *WalletServer) WalletAmount(w http.ResponseWriter, req *http.Request) {
 			return
 		}
 
-		w.Header().Set("Access-Control-Allow-Origin", "*")
-		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
-		w.Header().Set("Content-Type", "application/json")
 		if bcsResp.StatusCode == 200 {
 			decoder := json.NewDecoder(bcsResp.Body)
 			var bar block.AmountResponse
@@ -262,6 +306,7 @@ func (ws *WalletServer) Run() {
 	http.HandleFunc("/transaction", ws.CreateTransaction)
 
 	http.HandleFunc("/account", ws.Wallet)
+	http.HandleFunc("/login", ws.LoginWallet)
 
 	log.Fatal(http.ListenAndServe("0.0.0.0:"+strconv.Itoa(int(ws.Port())), nil))
 }
