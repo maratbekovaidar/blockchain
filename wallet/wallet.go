@@ -55,7 +55,7 @@ func NewWallet(u *utils.User) *Wallet {
 	// 9. Convert the result from a byte string into base58.
 	address := base58.Encode(dc8)
 	w.blockchainAddress = address
-	w.data = u.UploadUserToIPFS()
+	w.data = u.UploadUserToIPFS(address)
 	return w
 }
 

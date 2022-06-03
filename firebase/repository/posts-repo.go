@@ -36,7 +36,7 @@ func SaveAddresses(ipfsAddress string, blockchainAddress string) (bool, error) {
 
 	defer client.Close()
 	_, _, err = client.Collection(collectionName).Add(ctx, map[string]interface{}{
-		"ipfsAddress":        ipfsAddress,
+		"ipfs_address":       ipfsAddress,
 		"blockchain_address": blockchainAddress,
 	})
 	if err != nil {
@@ -96,7 +96,7 @@ func (*repo) FindAll() ([]utils.User, error) {
 			Name:       doc.Data()["name"].(string),
 			Email:      doc.Data()["email"].(string),
 			Password:   doc.Data()["password"].(string),
-			Reputation: doc.Data()["reputation"].(string),
+			Reputation: doc.Data()["reputation"].(int),
 			Company:    doc.Data()["Title"].(bool),
 			Field:      doc.Data()["Title"].(string),
 			Optional:   doc.Data()["Title"].(map[string]string),

@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="05ddedcd-48c2-4ef2-8ba4-47849b337c4f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/firebase/repository/posts-repo.go" beforeDir="false" afterPath="$PROJECT_DIR$/firebase/repository/posts-repo.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wallet/wallet.go" beforeDir="false" afterPath="$PROJECT_DIR$/wallet/wallet.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blockchain_server/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/blockchain_server/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wallet_server/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/wallet_server/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wallet_server/wallet_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/wallet_server/wallet_server.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
