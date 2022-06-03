@@ -94,10 +94,25 @@ func (ws *WalletServer) WalletInfo(w http.ResponseWriter, req *http.Request) {
 	}
 }
 
+func setupResponse(w *http.ResponseWriter, req *http.Request) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
+	(*w).Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+	(*w).Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+}
+
 func (ws *WalletServer) Wallet(w http.ResponseWriter, req *http.Request) {
+	//w.Header().Set("Access-Control-Allow-Origin", "*")
+	//w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+	//w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	//w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+	//w.Header().Set("Content-Type", "application/json")
+	setupResponse(&w, req)
 	switch req.Method {
 	case http.MethodPost:
-		w.Header().Add("Content-Type", "application/json")
+		//w.Header().Set("Access-Control-Allow-Origin", "*")
+		//w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+		//w.Header().Set("Content-Type", "application/json")
+		//w.Header().Set("Access-Control-Allow-Headers","Content-Type,access-control-allow-origin, access-control-allow-headers")
 		decoder := json.NewDecoder(req.Body)
 		var u utils.User
 		err := decoder.Decode(&u)
@@ -117,7 +132,10 @@ func (ws *WalletServer) Wallet(w http.ResponseWriter, req *http.Request) {
 			return
 		}
 
+		w.WriteHeader(http.StatusCreated)
 		io.WriteString(w, string(m[:]))
+
+		//io.WriteString(w, "Кирип келдим клубка")
 	default:
 		w.WriteHeader(http.StatusBadRequest)
 		log.Println("ERROR: Invalid HTTP Method")
@@ -200,7 +218,9 @@ func (ws *WalletServer) WalletAmount(w http.ResponseWriter, req *http.Request) {
 			return
 		}
 
-		w.Header().Add("Content-Type", "application/json")
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+		w.Header().Set("Content-Type", "application/json")
 		if bcsResp.StatusCode == 200 {
 			decoder := json.NewDecoder(bcsResp.Body)
 			var bar block.AmountResponse
@@ -229,8 +249,15 @@ func (ws *WalletServer) WalletAmount(w http.ResponseWriter, req *http.Request) {
 }
 
 func (ws *WalletServer) Run() {
+	//e := echo.New()
+	//e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+	//	AllowOrigins: []string{"*"},
+	//	AllowMethods: []string{"*"},
+	//}))
+	//
+	//e.POST("/account", ws.Wallet)
 	http.HandleFunc("/", ws.Index)
-	http.HandleFunc("/wallet", ws.Wallet)
+	//http.HandleFunc("/wallet", ws.Wallet)
 	http.HandleFunc("/wallet/amount", ws.WalletAmount)
 	http.HandleFunc("/transaction", ws.CreateTransaction)
 

@@ -41,7 +41,9 @@ func (bcs *BlockchainServer) GetBlockchain() *block.Blockchain {
 func (bcs *BlockchainServer) GetChain(w http.ResponseWriter, req *http.Request) {
 	switch req.Method {
 	case http.MethodGet:
-		w.Header().Add("Content-Type", "application/json")
+		w.Header().Set("Content-Type", "application/json")
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 		bc := bcs.GetBlockchain()
 		m, _ := bc.MarshalJSON()
 		io.WriteString(w, string(m[:]))
@@ -86,7 +88,9 @@ func (bcs *BlockchainServer) Transactions(w http.ResponseWriter, req *http.Reque
 		isCreated := bc.CreateTransaction(*t.SenderBlockchainAddress,
 			*t.RecipientBlockchainAddress, *t.Value, publicKey, signature)
 
-		w.Header().Add("Content-Type", "application/json")
+		w.Header().Set("Content-Type", "application/json")
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 		var m []byte
 		if !isCreated {
 			w.WriteHeader(http.StatusBadRequest)
@@ -148,7 +152,9 @@ func (bcs *BlockchainServer) Mine(w http.ResponseWriter, req *http.Request) {
 		} else {
 			m = utils.JsonStatus("success")
 		}
-		w.Header().Add("Content-Type", "application/json")
+		w.Header().Set("Content-Type", "application/json")
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 		io.WriteString(w, string(m))
 	default:
 		log.Println("ERROR: Invalid HTTP Method")
@@ -163,7 +169,9 @@ func (bcs *BlockchainServer) StartMine(w http.ResponseWriter, req *http.Request)
 		bc.StartMining()
 
 		m := utils.JsonStatus("success")
-		w.Header().Add("Content-Type", "application/json")
+		w.Header().Set("Content-Type", "application/json")
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 		io.WriteString(w, string(m))
 	default:
 		log.Println("ERROR: Invalid HTTP Method")
